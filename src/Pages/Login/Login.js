@@ -48,11 +48,12 @@ const Login = () => {
             >
             Sign Up
             </Nav.Link>
-                </small>
-
+            </small>
+            <p className="text-center">Or</p>
             <Button variant="dark" type="submit" className="w-100 fw-bold d-block my-2"
             
             >
+         
              <FcGoogle className="fw-bold fs-2 me-2" />Continue With Google
             </Button>
           </Form>

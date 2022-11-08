@@ -1,16 +1,25 @@
-import React from 'react';
-import { Button, Row } from 'react-bootstrap';
+import React, { useEffect, useState } from 'react';
+import { Button, Row,Col} from 'react-bootstrap';
 import Container from 'react-bootstrap/Container';
 import Slider from '../../Components/Slider/Slider';
 import sliderInfo from '../../Assets/sliderInfo.json';
 import Carousel from 'react-bootstrap/Carousel';
 import './Home.css';
+import ServicesCard from '../../Components/ServicesCard/ServicesCard';
 console.log(sliderInfo)
 
 const Home = () => {
-   
+    const [threeServices, setthreeServices] = useState([]);
+    const count=0;
+    useEffect(() => {
+      fetch("http://localhost:5000/threeservices")
+        .then((res) => res.json())
+        .then((data) => setthreeServices(data));
+    }, []);
+  
+    console.log("Three data",threeServices);
     return (
-        <Container className='py-1'> 
+        <Container className=''> 
             <Row>
             <Carousel slide={false} >
                 {
@@ -45,6 +54,26 @@ const Home = () => {
                 }
             </Carousel>
             </Row>
+           
+
+            <Row className='mx-0 '>
+            <Row className="border border-2 mx-0">
+                {
+                  threeServices.map((services)=>{
+                    return(
+                        <ServicesCard
+                        key={services._id}
+                        services={services}
+                        count={count}
+                        >
+
+                        </ServicesCard>
+                    )
+                  })  
+                }
+            </Row>
+            </Row>
+           
         </Container>
     );
 };

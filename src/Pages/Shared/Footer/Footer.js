@@ -3,6 +3,10 @@ import { CDBFooter, CDBFooterLink, CDBBox, CDBBtn, CDBIcon } from 'cdbreact';
 import { ImFacebook } from 'react-icons/im';
 import { BsTwitter } from 'react-icons/bs';
 import { GrInstagram } from 'react-icons/gr';
+import Navbar from 'react-bootstrap/Navbar';
+import NavDropdown from 'react-bootstrap/NavDropdown';
+import { Link } from 'react-router-dom';
+import { HiOutlineCamera } from 'react-icons/hi';
 
 
 const Footer = () => {
@@ -11,10 +15,14 @@ const Footer = () => {
       <CDBBox display="flex" flex="column" className="mx-auto py-5" style={{ width: '90%' }}>
         <CDBBox display="flex" justifyContent="between" className="flex-wrap">
           <CDBBox>
-            <a href="/" className="d-flex align-items-center p-0 text-dark">
-              <img alt="logo" src="logo" width="30px" />
-              <span className="ml-3 h5 font-weight-bold">Flytographer</span>
-            </a>
+          <Navbar.Brand as={Link} to='/home' >
+         <span className='fs-2 fw-bold me-2'>
+         <HiOutlineCamera className='text-primary'></HiOutlineCamera>
+         </span>
+          <span className='text-danger fw-bold'>
+           Flytographer
+          </span>
+        </Navbar.Brand>
             <p className="my-3" style={{ width: '250px' }}>
               We are creating High Quality Resources and tools to Aid developers during the
               developement of their projects
