@@ -10,7 +10,7 @@ console.log(sliderInfo)
 const Home = () => {
    
     return (
-        <Container> 
+        <Container className='py-1'> 
             <Row>
             <Carousel slide={false} >
                 {
@@ -24,12 +24,15 @@ const Home = () => {
                     >
                     <img
                        className="d-block w-100"
+                       style={{
+                        height: "500px"
+                       }}
                        src={info.url}
                        alt="Ohoo!!"
                      />
                     </div>
                   
-                     <Carousel.Caption className="" style={{top:"40%"}}>
+                     <Carousel.Caption className="" style={{top:"50%"}}>
                    
                        <h3 className='fw-bold fs-1'>{info.title}</h3>
                        <p className="fw-bold mb-2">{info.description}</p>

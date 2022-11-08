@@ -7,7 +7,7 @@ import { HiOutlineCamera } from 'react-icons/hi';
 
 function Navbars() {
   return (
-    <Navbar bg="light" expand="lg">
+    <Navbar bg="dark" expand="lg">
       <Container>
         <Navbar.Brand as={Link} to='/home' >
          <span className='fs-2 fw-bold me-2'>
@@ -17,11 +17,12 @@ function Navbars() {
            Flytographer
           </span>
         </Navbar.Brand>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Toggle aria-controls="basic-navbar-nav" className='bg-danger'/>
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mx-auto">
-            <Nav.Link as={Link} to='/home'>Home</Nav.Link>
-            <Nav.Link as={Link} to='/blog'>Blog</Nav.Link>
+            <Nav.Link className='text-white' as={Link} to='/home'>Home</Nav.Link>
+            <Nav.Link  className='text-white' as={Link} to='/blog'>Blog</Nav.Link>
+            <Nav.Link  className='text-white' as={Link} to='/login'>Login</Nav.Link>
            
           </Nav>
         </Navbar.Collapse>
