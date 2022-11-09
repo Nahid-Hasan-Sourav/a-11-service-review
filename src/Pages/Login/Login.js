@@ -20,6 +20,9 @@ const Login = () => {
   const[erros,setErrors]=useState('')
   const googleProvider=new GoogleAuthProvider()
   const navigate=useNavigate()
+  const location=useLocation()
+
+  const fromss = location.state?.from?.pathname || '/';
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -34,8 +37,8 @@ const Login = () => {
       const user = result.user;
       console.log(user)
       form.reset();
-      setErrors('')
-      navigate('/')
+      setErrors('');
+      navigate(fromss, {replace: true});
     
       
     })
