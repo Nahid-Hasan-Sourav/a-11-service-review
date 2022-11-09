@@ -57,7 +57,7 @@ const Login = () => {
         
         const user = result.user;
         console.log(user)
-        // navigate(from,{replace:true});
+        navigate(fromss,{replace:true});
         
       })
     .catch(error => {
