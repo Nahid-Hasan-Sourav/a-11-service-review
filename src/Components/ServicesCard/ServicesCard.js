@@ -27,7 +27,8 @@ const ServicesCard = ({services,count}) => {
               services.price
              }$
             </Card.Text>
-            <Button variant="danger" className='ms-auto d-block fw-bold' as={Link}>View Details</Button>
+            <Button variant="danger" className='ms-auto d-block fw-bold' as={Link}
+              to={`/services/${services._id}` }>View Details</Button>
           </Card.Body>
         </Card>
       </Col>

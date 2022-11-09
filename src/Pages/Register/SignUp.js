@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext, useState } from 'react';
 import { Col, Container, Row } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
@@ -8,8 +8,43 @@ import Lottie from 'lottie-react'
 import LoginAnim from '../../Assets/login.json'
 import SignUpAnim from '../../Assets/signUps.json'
 import { FcGoogle } from 'react-icons/fc';
+import { AuthContext } from '../../Contexts/AuthProvider/AuthProvider';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const SignUp = () => {
+  // const [regError,setregError]=useState('')
+
+  const navigate=useNavigate()
+  const{createUser}=useContext(AuthContext)
+  const[erros,setErrors]=useState('')
+  const handleSubmit =( event) => {
+    event.preventDefault();
+    const form = event.target;
+  
+    const name = form.name.value;
+    const photoURL = form.photoURL.value;
+    const email = form.email.value;
+    const password = form.password.value;
+    console.log(name, photoURL, email, password);
+
+    createUser(email, password)
+        .then(result => {
+            const user = result.user;
+            console.log(user);        
+            form.reset();
+            setErrors('')
+            navigate('/login')
+            
+        })
+        .catch(e => {
+            console.log(e.message);
+            setErrors(e.message)
+            // setregError(console.error(e))
+            
+        });
+}
+
+ 
     return (
         <Container>
         {/* <div>
@@ -38,7 +73,7 @@ const SignUp = () => {
 
           <Col lg="5" className="order">
           <h2 className="fw-bold text-center py-3">Sign Up</h2>
-            <Form >
+            <Form onSubmit={handleSubmit}>
               <Form.Group className="mb-3" controlId="formBasicEmail">
                 <Form.Label>Name</Form.Label>
                 <Form.Control name="name" type="text" placeholder="Enter Your full name" required/>            
@@ -58,7 +93,7 @@ const SignUp = () => {
               </Form.Group>
               
               <Form.Text className="text-danger mb-2 d-block">
-                 
+               {erros}
               </Form.Text>
               <Button variant="primary" type="submit" className='d-block w-100'>
                 Register

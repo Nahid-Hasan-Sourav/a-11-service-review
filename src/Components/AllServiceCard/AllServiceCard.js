@@ -28,6 +28,7 @@ const AllServiceCard = ({services}) => {
               variant="danger"
               className="ms-auto d-block fw-bold"
               as={Link}
+              to={`/services/${services._id}` }
             >
              View Details
             </Button>
