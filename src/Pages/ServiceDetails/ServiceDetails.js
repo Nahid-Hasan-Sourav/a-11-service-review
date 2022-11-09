@@ -12,6 +12,7 @@ import { AuthContext } from '../../Contexts/AuthProvider/AuthProvider';
 import Nav from 'react-bootstrap/Nav';
 
 import Modal from 'react-bootstrap/Modal';
+import ServiceReview from '../../Components/ServiceReview/ServiceReview';
 
 
 
@@ -20,12 +21,44 @@ const ServiceDetails = () => {
   const handleClose = () => setShow(false);
   const handleShow = () => {
     setShow(true)
-    // if(user.uid){
-    //   setShow(true)
-    // }
+   
   };
     const services=useLoaderData()
     const {user}=useContext(AuthContext)
+
+
+    const handleReview =(event)=>{
+      const current = new Date();
+      const time = current.toLocaleTimeString("en-US");
+      event.preventDefault();
+      const form = event.target;
+      const textArea=form.textarea.value;
+      // console.log("This review text",textArea);
+
+      const review={
+        reviewText:textArea,
+        serVicesId:services.serviceId,
+        userName:user.displayName,
+        userIMg:user.photoURL,   
+        userEmail:user.email,
+        serVicesName:services.name,
+        time:time
+      }
+
+     
+      // hit insert api
+      fetch('http://localhost:5000/review',{
+        method: 'POST',
+        headers:{
+          'content-type': 'application/json'
+        },
+        body: JSON.stringify(review)
+      })
+      .then(res=>res.json())
+      .then(data=>console.log(data))
+      .catch(err=>console.error(err))
+      
+    }
 
     return (
       <Container>
@@ -77,24 +110,27 @@ const ServiceDetails = () => {
                     <Modal.Title>Add Your Review</Modal.Title>
                   </Modal.Header>
                   <Modal.Body>
-                    <Form>
+                    <Form onSubmit={handleReview}>
                       <FloatingLabel
                         controlId="floatingTextarea2"
                         label="type here..."
                       >
                         <Form.Control
                           as="textarea"
+                          name="textarea"
                           placeholder=""
                           style={{ height: "100px" }}
                         />
                       </FloatingLabel>
 
-                      
+                    <Button variant="primary" type='submit' className="my-3">
+                      Send Review
+                    </Button>
                     </Form>
                   </Modal.Body>
                   <Modal.Footer>
-                    <Button variant="primary" type='submit'>
-                      Send Review
+                  <Button variant="secondary" onClick={handleClose}>
+                      Close
                     </Button>
                   </Modal.Footer>
                 </Modal>
@@ -123,8 +159,10 @@ const ServiceDetails = () => {
             )}
           </Col>
         </Row>
-        <Row className="mx-0">
+        <Row className='mx-0 justify-content-center '>
+              <ServiceReview serVicesId={services.serviceId}>
 
+              </ServiceReview>
         </Row>
       </Container>
     );

@@ -15,8 +15,9 @@ const SignUp = () => {
   // const [regError,setregError]=useState('')
 
   const navigate=useNavigate()
-  const{createUser}=useContext(AuthContext)
+  const{createUser,updateUserProfile,logOut}=useContext(AuthContext)
   const[erros,setErrors]=useState('')
+
   const handleSubmit =( event) => {
     event.preventDefault();
     const form = event.target;
@@ -33,7 +34,19 @@ const SignUp = () => {
             console.log(user);        
             form.reset();
             setErrors('')
+            handleUpdateUserProfile(name,photoURL)
+            
+            // after registration it will automatic logout start
+            logOut()
+            .then({})
+            .catch(e => {
+              console.error(e);
+              setErrors(e.message)
+             
+          });
+           // after registration it will automatic logout end
             navigate('/login')
+
             
         })
         .catch(e => {
@@ -43,6 +56,16 @@ const SignUp = () => {
             
         });
 }
+
+const handleUpdateUserProfile = (name, photoURL) => {
+  const profile = {
+      displayName: name,
+      photoURL: photoURL
+     }
+      updateUserProfile(profile)
+      .then(() => { })
+      .catch(error => console.error(error));
+  }
 
  
     return (
