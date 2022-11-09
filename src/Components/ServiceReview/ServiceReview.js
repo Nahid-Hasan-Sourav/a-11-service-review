@@ -4,13 +4,13 @@ import Card from 'react-bootstrap/Card';
 
 const ServiceReview = ({serVicesId}) => {
     const [review,setReview]=useState([])
-    const url=`http://localhost:5000/review?serVicesId=${serVicesId}`
+    // const url=`http://localhost:5000/review?serVicesId=${serVicesId}`
 
     useEffect(()=>{
-        fetch(url)
+        fetch(`http://localhost:5000/review?serVicesId=${serVicesId}`)
         .then(res=>res.json())
         .then(data=>setReview(data))
-    },[serVicesId?.serVicesId])
+    },[review])
     return (
         <>
             <Col lg='8 '>

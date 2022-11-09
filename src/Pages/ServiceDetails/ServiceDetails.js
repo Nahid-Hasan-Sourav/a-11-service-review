@@ -55,7 +55,12 @@ const ServiceDetails = () => {
         body: JSON.stringify(review)
       })
       .then(res=>res.json())
-      .then(data=>console.log(data))
+      .then(data=>{
+        console.log(data)
+        if(data.acknowledged){
+          form.reset();
+        }
+      })
       .catch(err=>console.error(err))
       
     }
@@ -119,6 +124,7 @@ const ServiceDetails = () => {
                           as="textarea"
                           name="textarea"
                           placeholder=""
+                          required
                           style={{ height: "100px" }}
                         />
                       </FloatingLabel>
