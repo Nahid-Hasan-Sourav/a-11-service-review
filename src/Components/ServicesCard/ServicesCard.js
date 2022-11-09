@@ -2,6 +2,7 @@ import React from 'react';
 import { Col } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
+import { Link } from 'react-router-dom';
 
 const ServicesCard = ({services,count}) => {
     console.log("ServicesCard", services);
@@ -18,12 +19,15 @@ const ServicesCard = ({services,count}) => {
                 count===0 ? services.description.slice(0,100):"hh"
              }
             </Card.Text>
-            <Card.Text className='bg-danger'>
-             {
+            <Card.Text className=''>
+             {/* {
                 count>0 ? services.price:""
-             }
+             } */}
+             <span className='fw-bold'>Price : </span>{
+              services.price
+             }$
             </Card.Text>
-            <Button variant="danger" className='ms-auto d-block fw-bold'>Details</Button>
+            <Button variant="danger" className='ms-auto d-block fw-bold' as={Link}>View Details</Button>
           </Card.Body>
         </Card>
       </Col>
