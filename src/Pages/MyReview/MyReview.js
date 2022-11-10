@@ -1,9 +1,12 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { Col, Container, Row } from 'react-bootstrap';
+import { Col, Container, Nav, Row } from 'react-bootstrap';
 import { AuthContext } from '../../Contexts/AuthProvider/AuthProvider';
 import Table from 'react-bootstrap/Table';
 import Card from 'react-bootstrap/Card';
 import { MdDelete } from 'react-icons/md';
+
+import { Link } from 'react-router-dom';
+import toast, { Toaster } from 'react-hot-toast';
 
 const MyReview = () => {
     const {user}=useContext(AuthContext)
@@ -29,7 +32,7 @@ const MyReview = () => {
                    
                     const remaining = review.filter(odr => odr._id !== id);
                     setReview(remaining);
-                    alert("Delete Successfully!");
+                    toast.success(' successfully deleted')
                 }
             })
         }
@@ -60,6 +63,7 @@ const MyReview = () => {
                       <th>Review Text</th>
                       <th>Update</th>
                       <th>Delete</th>
+                      <Toaster />
                     </tr>
                   </thead>
 
@@ -83,7 +87,14 @@ const MyReview = () => {
                         
                       </td>
                       <td>{review.reviewText}</td>
-                      <td>Otto</td>
+                      <td >
+
+                        <Nav.Link as={Link} to={`/review/${review._id}`}
+                        className='btn btn-primary text-white'
+                        >
+                        Edit Review
+                        </Nav.Link>
+                      </td>
                       <td 
                       style={{cursor:"pointer"}}
                       onClick={()=>handleDelete(review._id)}

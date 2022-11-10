@@ -22,7 +22,7 @@ const Home = () => {
     return (
         <Container className=''> 
         
-            <Row>
+            <Row className='mx-0 mt-0'>
             <Carousel slide={false} >
                 {
                      sliderInfo.map((info,index)=>{

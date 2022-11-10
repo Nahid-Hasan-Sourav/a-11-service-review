@@ -24,7 +24,7 @@ function Navbars() {
 
     // console.log("user",user.displayName);
   return (
-    <Navbar bg="dark" expand="lg">
+    <Navbar bg="dark" expand="lg" className='sticky-lg-top'>
       <Container>
         <Navbar.Brand as={Link} to='/home' className='mb-2'>
          <span className='fs-2 fw-bold me-2'>
