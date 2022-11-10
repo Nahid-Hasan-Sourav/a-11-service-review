@@ -13,6 +13,7 @@ import Nav from "react-bootstrap/Nav";
 
 import Modal from "react-bootstrap/Modal";
 import ServiceReview from "../../Components/ServiceReview/ServiceReview";
+import { PhotoProvider, PhotoView } from 'react-photo-view';
 
 const ServiceDetails = () => {
   const [show, setShow] = useState(false);
@@ -64,12 +65,17 @@ const ServiceDetails = () => {
       <Row className="mx-0 justify-content-center">
         <Col lg={8}>
           <Card classsName="shadow-lg">
-            <Card.Img
-              variant="top"
-              src={services.imgUrl}
-              style={{ height: "280px" }}
-              className="img-fluid w-100"
-            />
+            <PhotoProvider>
+              <PhotoView src={services.imgUrl}>
+                <Card.Img
+                  variant="top"
+                  src={services.imgUrl}
+                  style={{ height: "280px" }}
+                  className="img-fluid w-100"
+                />
+              </PhotoView>
+            </PhotoProvider>
+
             <Card.Body>
               <Card.Title className="fw-bold">{services.name}</Card.Title>
               <Card.Text>{services.description}</Card.Text>

@@ -64,11 +64,11 @@ const MyReview = () => {
         <Col lg="8">
           {review.length <= 0 ? (
             <>
-              <h2 className="fw-bold  text-center my-3 p-2">
+              <h2 className="fw-bold text-center " style={{marginTop:"35%"}}>
                 {/* Hi..!!{" "}
                   <span className="text-danger">{user.displayName} </span>
                   you have no review */}
-                No reviews were added
+                <p >No reviews were added</p>
               </h2>
             </>
           ) : (

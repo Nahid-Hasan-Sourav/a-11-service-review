@@ -1,22 +1,30 @@
 import React, { useEffect, useState } from "react";
 import { Button, Row, Col } from "react-bootstrap";
 import Container from "react-bootstrap/Container";
-import Slider from "../../Components/Slider/Slider";
+// import Slider from "../../Components/Slider/Slider";
 import sliderInfo from "../../Assets/sliderInfo.json";
 import Carousel from "react-bootstrap/Carousel";
 import "./Home.css";
 import ServicesCard from "../../Components/ServicesCard/ServicesCard";
 import { Link } from "react-router-dom";
 import useTitle from "../../Hooks/useTitle";
+import ChoseCity from "../../Components/ChooseCity/ChoseCity";
+import SpecialServie from "../../Components/SpecialService/SpecialServie";
+import Spinner from 'react-bootstrap/Spinner';
 
 const Home = () => {
   useTitle("Home")
   const [threeServices, setthreeServices] = useState([]);
+  const [loading,setLoading]=useState(true)
   const count = 0;
   useEffect(() => {
     fetch("https://a11-flytographer-server-side.vercel.app/threeservices")
       .then((res) => res.json())
-      .then((data) => setthreeServices(data));
+      .then((data) => {
+        setthreeServices(data)
+        setLoading(false)
+      
+      });
   }, []);
 
   console.log("Three data", threeServices);
@@ -62,6 +70,22 @@ const Home = () => {
         Here are some basic packages that you can avail services from us and the price of each package is given. I will try my best to make your evergreen moments more beautiful .My customer's  satisfaction is my  ultimate goal.
         </p>
         <Row className="my-3 mx-0">
+          {
+
+          loading &&
+          <>
+          <Spinner animation="border" variant="warning" />
+          <Spinner animation="border" variant="info" />
+          <Spinner animation="border" variant="light" />
+          <Spinner animation="border" variant="dark" />
+          <Spinner animation="grow" variant="primary" />
+          <Spinner animation="grow" variant="secondary" />
+          <Spinner animation="grow" variant="success" />
+          <Spinner animation="grow" variant="danger" />
+          <Spinner animation="grow" variant="warning" />
+          </>
+
+          }
           {threeServices.map((services) => {
             return (
               <ServicesCard
@@ -81,6 +105,11 @@ const Home = () => {
           SEE ALL
         </Button>
       </Row>
+
+      <ChoseCity></ChoseCity>
+
+      <SpecialServie></SpecialServie>
+      
     </Container>
   );
 };

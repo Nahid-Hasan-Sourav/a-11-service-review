@@ -24,8 +24,7 @@ const Footer = () => {
           </span>
         </Navbar.Brand>
             <p className="my-3" style={{ width: '250px' }}>
-              We are creating High Quality Resources and tools to Aid developers during the
-              developement of their projects
+            Photography is the art, application, and practice of creating durable images by recording light, either electronically by means of an image sensor
             </p>
             <CDBBox display="flex" className="mt-4">
               <CDBBtn flat color="dark">
@@ -40,34 +39,40 @@ const Footer = () => {
             </CDBBox>
           </CDBBox>
           <CDBBox>
-            <p className="h5 mb-4" style={{ fontWeight: '600' }}>
-              Devwares
-            </p>
-            <CDBBox flex="column" style={{ cursor: 'pointer', padding: '0' }}>
-              <CDBFooterLink href="/">Resources</CDBFooterLink>
-              <CDBFooterLink href="/">About Us</CDBFooterLink>
-              <CDBFooterLink href="/">Contact</CDBFooterLink>
-              <CDBFooterLink href="/">Blog</CDBFooterLink>
+          <Navbar.Brand as={Link} to='/home' >
+         <span className='fs-2 fw-bold me-2'>
+         <HiOutlineCamera className='text-primary'></HiOutlineCamera>
+         </span>
+          <span className='text-danger fw-bold'>
+           Flytographer
+          </span>
+        </Navbar.Brand>
+            <CDBBox flex="column" style={{ cursor: 'pointer', padding: '0' }} className='mt-3'>
+              <CDBFooterLink as={Link} to='/blog' className='text-decoration-none text-dark'>Resources</CDBFooterLink>
+              <CDBFooterLink as={Link} to='/blog' className='text-decoration-none text-dark'>About Us</CDBFooterLink>
+              <CDBFooterLink as={Link} to='/blog' className='text-decoration-none text-dark'>Contact</CDBFooterLink>
+              <CDBFooterLink as={Link} to='/blog' className='text-decoration-none text-dark'>Blog</CDBFooterLink>
             </CDBBox>
           </CDBBox>
           <CDBBox>
-            <p className="h5 mb-4" style={{ fontWeight: '600' }}>
+            <p className="h5 mb-4 pt-4" style={{ fontWeight: '600' }} >
               Help
             </p>
-            <CDBBox flex="column" style={{ cursor: 'pointer', padding: '0' }}>
-              <CDBFooterLink href="/">Support</CDBFooterLink>
-              <CDBFooterLink href="/">Sign Up</CDBFooterLink>
-              <CDBFooterLink href="/">Sign In</CDBFooterLink>
+            <CDBBox flex="column" style={{ cursor: 'pointer', padding: '0' }} className='mt-3'>
+              <CDBFooterLink as={Link} to='/blog' className='text-decoration-none text-dark'>Support</CDBFooterLink>
+              <CDBFooterLink as={Link} to='/blog' className='text-decoration-none text-dark'>Sign Up</CDBFooterLink>
+              <CDBFooterLink as={Link} to='/blog' className='text-decoration-none text-dark'>Sign In</CDBFooterLink>
             </CDBBox>
           </CDBBox>
           <CDBBox>
-            <p className="h5 mb-4" style={{ fontWeight: '600' }}>
-              Products
+            <p className="h5 mb-4 pt-4" style={{ fontWeight: '600' }}>
+              Package
             </p>
             <CDBBox flex="column" style={{ cursor: 'pointer', padding: '0' }}>
-              <CDBFooterLink href="/">Windframe</CDBFooterLink>
-              <CDBFooterLink href="/">Loop</CDBFooterLink>
-              <CDBFooterLink href="/">Contrast</CDBFooterLink>
+              <CDBFooterLink className='text-decoration-none text-dark'>Sports Photography</CDBFooterLink>
+              <CDBFooterLink className='text-decoration-none text-dark'>Pet Photography</CDBFooterLink>
+              <CDBFooterLink className='text-decoration-none text-dark'>Event Photography</CDBFooterLink>
+              <CDBFooterLink className='text-decoration-none text-dark'>More Packages</CDBFooterLink>
             </CDBBox>
           </CDBBox>
         </CDBBox>

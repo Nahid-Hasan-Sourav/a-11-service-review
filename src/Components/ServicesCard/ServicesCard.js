@@ -3,6 +3,7 @@ import { Col } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import { Link } from 'react-router-dom';
+import { PhotoProvider, PhotoView } from 'react-photo-view';
 
 const ServicesCard = ({services,count}) => {
     console.log("ServicesCard", services);
@@ -11,13 +12,19 @@ const ServicesCard = ({services,count}) => {
     return (
       <Col className="g-3" lg='4'>
         <Card classsName="shadow-lg">
-          <Card.Img variant="top" src={services.imgUrl} style={{height:"280px"}} className="img-fluid"/>
+      <PhotoProvider>
+      <PhotoView src={services.imgUrl}>
+      <Card.Img variant="top" src={services.imgUrl} style={{height:"280px"}} className="img-fluid"/>
+      </PhotoView>
+    </PhotoProvider>
+          
           <Card.Body>
             <Card.Title className='fw-bold'>{services.name}</Card.Title>
             <Card.Text>
-             {
-                count===0 ? services.description.slice(0,100):"hh"
-             }
+             {/* {
+                count===0 ? <>services.description.slice(0,100)</>: "No text"
+             } */}
+           {  services.description.slice(0,100)}...<span className='text-primary'>Read More</span>
             </Card.Text>
             <Card.Text className=''>
              {/* {
