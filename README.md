@@ -5,7 +5,7 @@
 
 # About Project 
 
-- This is a service review job site. In this project I am using react-bootstarp,react-router-dom,react-icons,toast etc
+- This is a service review web site. In this project I am using react-bootstarp,react-router-dom,react-icons,toast etc
 
 - On the home page there is a slider and some service cards and a single see all button clicking this button will take you to the all services page.If you go to the All services page, you can see all the services.
 
