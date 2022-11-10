@@ -45,9 +45,10 @@ const AddService = () => {
         .then(data => {
             console.log("database",data);
             if(data.acknowledged){
-               toast('User added successfully');
+               toast('service added successfully');
                 form.reset();
-                navigate('/services')
+                form.reset();
+                // navigate('/services')
             }
         })
        

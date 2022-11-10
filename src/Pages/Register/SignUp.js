@@ -8,16 +8,24 @@ import Lottie from 'lottie-react'
 import LoginAnim from '../../Assets/login.json'
 import SignUpAnim from '../../Assets/signUps.json'
 import { FcGoogle } from 'react-icons/fc';
+import { GoogleAuthProvider } from "firebase/auth";
 import { AuthContext } from '../../Contexts/AuthProvider/AuthProvider';
+
 import { useLocation, useNavigate } from 'react-router-dom';
 
+
 const SignUp = () => {
-  // const [regError,setregError]=useState('')
+
+  
 
   const navigate=useNavigate()
-  const{createUser,updateUserProfile,logOut}=useContext(AuthContext)
+  const{createUser,updateUserProfile,logOut,providerLogin}=useContext(AuthContext)
   const[erros,setErrors]=useState('')
 
+  const googleProvider=new GoogleAuthProvider()
+ 
+  const location=useLocation()
+  const fromss = location.state?.from?.pathname || '/';
   const handleSubmit =( event) => {
     event.preventDefault();
     const form = event.target;
@@ -67,18 +75,52 @@ const handleUpdateUserProfile = (name, photoURL) => {
       .catch(error => console.error(error));
   }
 
+  const handleGoogleSignIn=(e)=>{
+    e.preventDefault()
+    console.log("clickLogin");
+    providerLogin(googleProvider)
+    .then((result) => {
+        
+        const user = result.user;
+        // console.log(user)
+        // navigate(fromss,{replace:true});
+        const currentUser = {
+          email: user.email
+      }
+     
+  
+      console.log("Current user",currentUser);
+  
+        // get jwt token
+        fetch('http://localhost:5000/jwt', {
+          method: 'POST',
+          headers: {
+              'content-type': 'application/json'
+          },
+          body: JSON.stringify(currentUser)
+      })
+      .then(res => res.json())
+      .then(data => {
+       console.log(data);   
+        localStorage.setItem('genius-token', data.token);
+         
+        });
+        
+        // form.reset();
+        setErrors('');
+        navigate(fromss, {replace: true});
+      
+        
+      })
+    .catch(error => {
+      console.error(error)
+    
+    })
+}
+
  
     return (
         <Container>
-        {/* <div>
-        <Lottie
-             animationData={SignUpAnim}
-          
-             style={{height:"200px"}}
-            >
-
-            </Lottie>
-    </div> */}
        
         <Row className="justify-content-center align-items-center">
           
@@ -134,7 +176,7 @@ const handleUpdateUserProfile = (name, photoURL) => {
                 
               
             </Form>
-           <Button variant="light" type="submit" className='bg-light d-block w-100 mb-2 fw-bold'>
+           <Button variant="light" type="submit" className='bg-light d-block w-100 mb-2 fw-bold' onClick={handleGoogleSignIn}>
               <FcGoogle className="fw-bold fs-2 me-2" />Continue With Google
           </Button>     
           </Col>

@@ -9,15 +9,32 @@ import { Link } from 'react-router-dom';
 import toast, { Toaster } from 'react-hot-toast';
 
 const MyReview = () => {
-    const {user}=useContext(AuthContext)
+    const {user,logOut}=useContext(AuthContext)
     const [review,setReview]=useState([])
     
 
     useEffect(()=>{
-        fetch(`http://localhost:5000/my-review?userEmail=${user.email}`)
-        .then(res=>res.json())
-        .then(data=>setReview(data))
-    },[user?.email])
+        fetch(`http://localhost:5000/my-review?userEmail=${user.email}`,{
+          headers: {
+            authorization: `Bearer ${localStorage.getItem('genius-token')} `
+          }
+        })
+        .then(res=>{
+          if (res.status === 401 || res.status === 403) {
+            // return logOut();
+        }
+        return res.json();
+        
+        })
+        .then(data=>
+          {
+            console.log("Received",data);
+            setReview(data)
+          }
+          )
+    },[user?.email,logOut])
+
+    console.log("Review image",review)
 
     const handleDelete =(id)=>{
         console.log("Delete item",id);
