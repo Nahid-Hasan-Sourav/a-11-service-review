@@ -1,14 +1,21 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Container, Row, Col} from 'react-bootstrap';
 import {useLoaderData, useNavigate} from 'react-router-dom'
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
+import toast, { Toaster } from 'react-hot-toast';
+
+
+
+
 
 
 const UpdateReview = () => {
     const review=useLoaderData();
     const navigate=useNavigate()
+
+    
     console.log("review",review);
 
     const handleUpdate=(event)=>{
@@ -32,10 +39,13 @@ const UpdateReview = () => {
         .then(res => res.json())
         .then(data => {
             if (data.modifiedCount > 0){
-                alert('user updated')
-                navigate('/my-review')
+              toast('Review Updated')
                 console.log(data);
+                navigate('/my-review')
+               
             }
+           
+            
             
         })
     }
@@ -46,35 +56,43 @@ const UpdateReview = () => {
       <Container>
         <Row className="mx-0 justify-content-center align-content-center align-items-center h-100">
           <Col lg={6}>
-         
             <Form onSubmit={handleUpdate}>
-            <Form.Group className="mb-3" controlId="formBasicPassword">
+              <Toaster />
+              <Form.Group className="mb-3" controlId="formBasicPassword">
                 <Form.Label>User Name</Form.Label>
-                <Form.Control type="text" defaultValue={review.userName} readOnly={true} disabled/>
+                <Form.Control
+                  type="text"
+                  defaultValue={review.userName}
+                  readOnly={true}
+                  disabled
+                />
               </Form.Group>
 
-               <Form.Group className="mb-3" controlId="formBasicEmail">
+              <Form.Group className="mb-3" controlId="formBasicEmail">
                 <Form.Label>Services Name</Form.Label>
-                <Form.Control type="email" defaultValue={review.serVicesName} readOnly={true} disabled/>
-               
+                <Form.Control
+                  type="email"
+                  defaultValue={review.serVicesName}
+                  readOnly={true}
+                  disabled
+                />
               </Form.Group>
               <Form.Label>Your Review</Form.Label>
               <FloatingLabel
-                        controlId="floatingTextarea2"
-                        label="Edit Your Review"
-                      >
-                        <Form.Control
-                          as="textarea"
-                          name="textarea"
-                          placeholder=""
-                          defaultValue={review.reviewText}
-                          style={{ height: "100px" }}
-                        />
-            </FloatingLabel>
-              
+                controlId="floatingTextarea2"
+                label="Edit Your Review"
+              >
+                <Form.Control
+                  as="textarea"
+                  name="textarea"
+                  placeholder=""
+                  defaultValue={review.reviewText}
+                  style={{ height: "100px" }}
+                />
+              </FloatingLabel>
              
-              <Button variant="danger" type="submit" className='my-2'>
-                Update 
+              <Button variant="danger" type="submit" className="my-2">
+                Update
               </Button>
             </Form>
           </Col>
